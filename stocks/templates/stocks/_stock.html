@@ -1,12 +1,14 @@
-
-
-        <div class="card-content blue white-text">
-            <div class="card-content">
-                <span class="card-title">{{ stock.company_name }}</span>
-                <ul class="collection black-text">
-                    <li class="collection-item">Ticker: {{ stock.ticker }}</li>
-                    <li class="collection-item">Last value: {{ stock.last_value }}$</li>
-                </ul>
-            </div>
+<div class="card-content blue white-text">
+    <div class="card-content">
+        <span class="card-title">{{ stock.company_name }}</span>
+        <ul class="collection black-text">
+            <li class="collection-item">Ticker: {{ stock.ticker }}</li>
+            <li class="collection-item">Last value: {{ stock.last_value }}$</li>
+        </ul>
+        <div class="card-action">
+            <a href="#" class="btn-small blue btn-flat white-text">Details</a>
+            <a href="{% url 'stocks:delete' pk=stock.pk %}" class="btn-small red btn-flat white-text">Delete</a>
         </div>
+    </div>
+</div>
 

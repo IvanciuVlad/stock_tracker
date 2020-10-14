@@ -2,10 +2,12 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy, path
 from braces.views import SelectRelatedMixin
 from django.http import Http404
 from . import models
+
+from django.shortcuts import redirect
 
 User = get_user_model()
 
@@ -44,11 +46,12 @@ class CreateStock(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-
 class DeleteStock(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
     model = models.Stock
-    select_related = ('user')
-    success_url = reverse_lazy('stocks:all')
+    select_related = ('user',)
+
+    def get_success_url(self):
+        return reverse_lazy('stocks:for_user', kwargs={"username": self.object.user.__str__()})
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -57,3 +60,13 @@ class DeleteStock(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
     def delete(self, *args, **kwargs):
         messages.success(self.request, 'Stock deleted')
         return super().delete(*args, **kwargs)
+
+
+class StockDetail(SelectRelatedMixin, generic.DetailView):
+    model = models.Stock
+    select_related = ('user',)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user__username__iexact=self.kwargs.get('username'))
+

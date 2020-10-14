@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.StockList.as_view(), name='all'),
     path('new/', views.CreateStock.as_view(), name='create'),
     path('by/<str:username>/', views.UserStocks.as_view(), name='for_user'),
-    path('delete/<int:pk>/', views.DeleteStock.as_view(), name='delete')
+    path('by/<str:username>/<int:pk>/', views.StockDetail.as_view(), name='single'),
+    path('delete/<int:pk>/', views.DeleteStock.as_view(), name='delete'),
 ]
