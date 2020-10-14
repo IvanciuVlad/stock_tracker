@@ -1,14 +1,16 @@
-<div class="card-content blue white-text">
-    <div class="card-content">
+<div class="col s4 m4">
+    <div class="card blue white-text">
+
         <span class="card-title">{{ stock.company_name }}</span>
         <ul class="collection black-text">
-            <li class="collection-item">Ticker: {{ stock.ticker }}</li>
-            <li class="collection-item">Last value: {{ stock.last_value }}$</li>
+            <li class="collection-item"><b>Ticker:</b> {{ stock.ticker }}</li>
+            <li class="collection-item"><b>Last value:</b> {{ stock.last_value }}$</li>
         </ul>
         <div class="card-action">
-            <a href="#" class="btn-small blue btn-flat white-text">Details</a>
-            <a href="{% url 'stocks:delete' pk=stock.pk %}" class="btn-small red btn-flat white-text">Delete</a>
+            <a href="#" class="btn blue btn-flat white-text">Details</a>
+            <a href="{% url 'stocks:delete' pk=stock.pk %}" class="btn red btn-flat white-text">Delete</a>
         </div>
-    </div>
-</div>
 
+    </div>
+
+</div>

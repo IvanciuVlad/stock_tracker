@@ -1,0 +1,14 @@
+
+.cards-container {
+  column-break-inside: avoid;
+  page-break-inside: avoid;
+  column-count: 3;
+  .card {
+    display: inline-block;
+    overflow: visible;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
