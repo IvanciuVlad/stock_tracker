@@ -2,19 +2,12 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.contrib import messages
-from django.urls import reverse, reverse_lazy, path
+from django.urls import reverse_lazy
 from braces.views import SelectRelatedMixin
 from django.http import Http404
 from . import models
 
-from django.shortcuts import redirect
-
 User = get_user_model()
-
-
-class StockList(SelectRelatedMixin, generic.ListView):
-    model = models.Stock
-    select_related = ('user',)
 
 
 class UserStocks(generic.ListView):
