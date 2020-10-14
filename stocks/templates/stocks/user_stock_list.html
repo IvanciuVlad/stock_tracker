@@ -1,0 +1,19 @@
+{% extends "stocks/stock_base.html" %}
+
+{% block prepost %}
+    <div class="col s12 m6">
+        <h1>{{ stock_user.username }}</h1>
+    </div>
+{% endblock %}
+
+{% block post_content %}
+
+    <div class="col s6 m6 l3 center-align">
+        <div class="row">
+        {% for stock in stock_list %}
+            {% include "stocks/_stock.html" %}
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

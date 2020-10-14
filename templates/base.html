@@ -39,11 +39,15 @@
 <header>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Stock tracker</a>
+            <a href="{% url 'home' %}" class="brand-logo">Stock tracker</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Stocks</a></li>
-
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'stocks:create' %}">Add a stock</a></li>
+                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                     <li><a href="{% url 'accounts:signup' %}">Sign up</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
