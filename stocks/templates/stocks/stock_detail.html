@@ -2,7 +2,23 @@
 
 
 {% block post_content %}
-    <div class="col sm12 md6">
-        {% include "posts/_post.html" %}
+    <div class="col s12 m6">
+        <div class=" card blue white-text">
+
+            <span class="card-title">{{ stock.company_name }}</span>
+            <a href="{% url 'stocks:delete' pk=stock.pk %}" class="btn red btn-flat white-text">Delete</a>
+
+            <ul class="collection black-text">
+                <li class="collection-item"><b>Ticker: </b> {{ stock.ticker }}</li>
+                <li class="collection-item"><b>Last value: </b> {{ stock.last_value }}$</li>
+                <li class="collection-item"><b>52 weeks high: </b> {{ stock.week52High }}$</li>
+                <li class="collection-item"><b>52 weeks low: </b> {{ stock.week52Low }}$</li>
+                <li class="collection-item"><b>Primary exchange: </b> {{ stock.primary_exchange }}</li>
+                <li class="collection-item"><b>PE Ratio: </b> {{ stock.pe_ratio }}</li>
+                <li class="collection-item"><b>YTD change: </b> {{ stock.ytd_change }}</li>
+                <li class="collection-item"><b>Market Cap: </b> {{ stock.market_cap }}$</li>
+            </ul>
+
+        </div>
     </div>
 {% endblock %}

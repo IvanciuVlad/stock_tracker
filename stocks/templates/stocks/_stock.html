@@ -7,7 +7,7 @@
             <li class="collection-item"><b>Last value:</b> {{ stock.last_value }}$</li>
         </ul>
         <div class="card-action">
-            <a href="#" class="btn blue btn-flat white-text">Details</a>
+            <a href="{% url 'stocks:single' username=stock.user.username pk=stock.pk %}" class="btn blue btn-flat white-text">Details</a>
             <a href="{% url 'stocks:delete' pk=stock.pk %}" class="btn red btn-flat white-text">Delete</a>
         </div>
 
