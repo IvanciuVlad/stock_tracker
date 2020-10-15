@@ -16,7 +16,8 @@ class Stock(models.Model):
     company_name = models.CharField(max_length=96)
     ytd_change = models.DecimalField(max_digits=6, decimal_places=2, null=True)
     pe_ratio = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-    market_cap = models.PositiveIntegerField(null=True)
+    market_cap = models.CharField(max_length=128, null=True)
+    logo = models.URLField(max_length=256, null=True)
 
     def __str__(self):
         return self.ticker
@@ -24,6 +25,7 @@ class Stock(models.Model):
     def lookup(self):
         print(settings.IEX_TOKEN)
         stock = LibStock(self.ticker, token=settings.IEX_TOKEN)
+        print(stock.get_logo())
         stock_attributes = stock.get_quote()
         print(stock_attributes)
         self.last_value = stock_attributes['latestPrice']
@@ -34,6 +36,8 @@ class Stock(models.Model):
         self.pe_ratio = stock_attributes['peRatio']
         self.market_cap = stock_attributes['marketCap']
         self.ytd_change = stock_attributes['ytdChange']
+        logo_link = stock.get_logo()
+        self.logo = logo_link['url']
 
     def get_absolute_url(self):
         return reverse('stocks:for_user', kwargs={'username': self.user.username})

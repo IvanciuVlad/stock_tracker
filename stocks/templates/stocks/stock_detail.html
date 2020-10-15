@@ -1,12 +1,15 @@
 {% extends "stocks/stock_base.html" %}
+{% load humanize %}
 
 
 {% block post_content %}
-    <div class="col s12 m6">
+    <div class="col s12">
         <div class=" card blue white-text">
 
+            <img width="48" height="48" alt="company logo" class="logo" src={{ stock.logo }} />
             <span class="card-title">{{ stock.company_name }}</span>
-            <a href="{% url 'stocks:delete' pk=stock.pk %}" class="btn red btn-flat white-text">Delete</a>
+
+            <a href="{% url 'stocks:delete' pk=stock.pk %}" class="btn red btn-flat white-text delete-btn">Delete</a>
 
             <ul class="collection black-text">
                 <li class="collection-item"><b>Ticker: </b> {{ stock.ticker }}</li>
@@ -16,7 +19,7 @@
                 <li class="collection-item"><b>Primary exchange: </b> {{ stock.primary_exchange }}</li>
                 <li class="collection-item"><b>PE Ratio: </b> {{ stock.pe_ratio }}</li>
                 <li class="collection-item"><b>YTD change: </b> {{ stock.ytd_change }}</li>
-                <li class="collection-item"><b>Market Cap: </b> {{ stock.market_cap }}$</li>
+                <li class="collection-item"><b>Market Cap: </b> {{ stock.market_cap|intword }}$</li>
             </ul>
 
         </div>
