@@ -8,7 +8,7 @@ User = get_user_model()
 
 class Stock(models.Model):
     user = models.ForeignKey(User, related_name='stocks', on_delete=models.DO_NOTHING, null=True, blank=True,)
-    ticker = models.CharField(max_length=4)
+    ticker = models.CharField(max_length=8)
     last_value = models.DecimalField(max_digits=6, decimal_places=2, null=True)
     week52High = models.DecimalField(max_digits=6, decimal_places=2, null=True)
     week52Low = models.DecimalField(max_digits=6, decimal_places=2, null=True)
