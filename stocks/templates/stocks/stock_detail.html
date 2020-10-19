@@ -9,7 +9,16 @@
             <img width="48" height="48" alt="company logo" class="logo" src={{ stock.logo }} />
             <span class="card-title">{{ stock.company_name }}</span>
 
-            <a href="{% url 'stocks:delete' pk=stock.pk %}" class="btn red btn-flat white-text delete-btn">Delete</a>
+            <a href="{% url 'stocks:delete' pk=stock.pk %}" class="btn red btn-flat white-text ">Delete</a>
+
+            <!--<form action="{% url 'stocks:update' pk=stock.id username=user.username %}" method="post">
+                {% csrf_token %}
+                <input value="{{ stock.ticker }}" name="ticker" disabled class="hidden-stuff" />
+                <button type="submit" class="btn green btn-flat white-text">Update</button>
+            </form> -->
+
+            <a href="{% url 'stocks:update' pk=stock.id username=user.username %}" class="btn green btn-flat white-text">Update</a>
+
 
             <ul class="collection black-text">
                 <li class="collection-item"><b>Ticker: </b> {{ stock.ticker }}</li>

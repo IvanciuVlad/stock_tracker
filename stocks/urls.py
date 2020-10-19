@@ -9,4 +9,5 @@ urlpatterns = [
     path('by/<str:username>/', views.UserStocks.as_view(), name='for_user'),
     path('by/<str:username>/<int:pk>/', views.StockDetail.as_view(), name='single'),
     path('delete/<int:pk>/', views.DeleteStock.as_view(), name='delete'),
+    path('by/<str:username>/<int:pk>/update/', views.stockupdate, name='update')
 ]

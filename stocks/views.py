@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from braces.views import SelectRelatedMixin
 from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect
 from . import models
 
 User = get_user_model()
@@ -55,7 +56,7 @@ class DeleteStock(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
         return super().delete(*args, **kwargs)
 
 
-class StockDetail(SelectRelatedMixin, generic.DetailView):
+class StockDetail(LoginRequiredMixin, SelectRelatedMixin, generic.DetailView):
     model = models.Stock
     select_related = ('user',)
 
@@ -63,3 +64,19 @@ class StockDetail(SelectRelatedMixin, generic.DetailView):
         queryset = super().get_queryset()
         return queryset.filter(user__username__iexact=self.kwargs.get('username'))
 
+
+# class StockUpdate(LoginRequiredMixin, SelectRelatedMixin):
+#     model = models.Stock
+#     select_related = ('user', )
+#     fields = ('ticker',)
+#
+#     def get_success_url(self):
+#         return reverse_lazy('stocks:for_user', kwargs={"username": self.object.user.__str__()})
+
+def stockupdate(request, username, pk):
+
+    stock = get_object_or_404(models.Stock, id=pk)
+    stock.lookup()
+    stock.save()
+    # form = models.Stock(request.POST or None, instance=stock)
+    return redirect('stocks:for_user', username=stock.user.__str__())
